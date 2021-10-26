@@ -185,4 +185,48 @@
 
 .chat__footer {
   margin-top: auto;
+
+  & .form::before {
+    display: block;
+    content: '';
+    width: 100%;
+    height: 1px;
+  }
+
+  .form__field {
+    width: 0;
+    opacity: 0;
+    transition: width 0.5s ease;
+
+  }
+  &--anim {
+
+    .form__field {
+      opacity: 1;
+      padding: 0 5.6rem;
+      width: $width-input-dt;
+      @media (min-width: $stop-scaling) {
+        padding: $padding-input-ss;
+        width: $width-input-ss;
+
+      }
+
+      @media (orientation: portrait) {
+        padding: $padding-input-portrait;
+        width: $width-input-portrait;
+      }
+
+      @media (max-width: $tablet) and (orientation: landscape) {
+        width: $width-input-tb;
+      }
+
+      @media (max-width: $mobile) and (orientation: landscape) {
+
+        padding: $padding-input-mb;
+        width: $width-input-mb;
+
+      }
+    }
+
+  }
 }

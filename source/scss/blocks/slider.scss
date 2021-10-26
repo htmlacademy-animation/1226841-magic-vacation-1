@@ -64,7 +64,15 @@
     }
   }
 }
-
+.slider__item-text, .slider__item-title {
+  opacity: 0;
+  transform: translatex(-40px);
+  transition: transform 300ms ease-out, opacity 300ms ease-out;
+}
+.slider__item--animate {
+  opacity: 1;
+  transform: translatex(0);
+}
 .slider__item-title {
   margin: 0 0 0 -5.5rem;
   text-transform: uppercase;
