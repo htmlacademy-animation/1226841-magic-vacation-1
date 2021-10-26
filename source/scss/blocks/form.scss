@@ -32,9 +32,9 @@
 .form__field {
   flex: none;
   margin-right: 3rem;
-  padding: 0 5.6rem;
+  padding: $padding-input-dt;
   height: 6rem;
-  width: calc(100% - 21rem);
+  width: $width-input-dt;
   text-transform: uppercase;
   font: inherit;
   font-size: 2.4rem;
@@ -50,29 +50,29 @@
 
   @media (min-width: $stop-scaling) {
     margin-right: 30px;
-    padding: 0 56px;
+    padding: $padding-input-ss;
     height: 60px;
-    width: calc(100% - 210px);
+    width: $width-input-ss;
     font-size: 24px;
     border-radius: 30px;
   }
 
   @media (orientation: portrait) {
     margin-right: 1rem;
-    padding: 0 2.5rem;
-    width: calc(100% - 5rem);
+    padding: $padding-input-portrait;
+    width: $width-input-portrait;
     height: 4rem;
     font-size: 1.6rem;
   }
 
   @media (max-width: $tablet) and (orientation: landscape) {
-    width: calc(100% - 9rem);
+    width: $width-input-tb;
   }
 
   @media (max-width: $mobile) and (orientation: landscape) {
     margin-right: 1rem;
-    padding: 0 2.5rem;
-    width: calc(100% - 5rem);
+    padding: $padding-input-mb;
+    width: $width-input-mb;
     height: 4rem;
     font-size: 1.6rem;
   }

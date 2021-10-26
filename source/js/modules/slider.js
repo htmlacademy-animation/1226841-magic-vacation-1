@@ -26,6 +26,7 @@ export default () => {
             } else if (storySlider.activeIndex === 6 || storySlider.activeIndex === 7) {
               sliderContainer.style.backgroundImage = `url("img/slide4.jpg"), linear-gradient(180deg, rgba(45, 39, 63, 0) 0%, #2F2A42 16.85%)`;
             }
+            animateText()
           },
           resize: () => {
             storySlider.update();
@@ -49,6 +50,7 @@ export default () => {
         keyboard: {
           enabled: true
         },
+        speed: 0,
         on: {
           slideChange: () => {
             if (storySlider.activeIndex === 0) {
@@ -61,6 +63,13 @@ export default () => {
               sliderContainer.style.backgroundImage = `url("img/slide4.jpg")`;
             }
           },
+          reachBeginning:  () => {
+            animateText()
+          },
+          slideChangeTransitionEnd:() => {
+            animateText()
+
+          },
           resize: () => {
             storySlider.update();
           }
@@ -70,6 +79,27 @@ export default () => {
       });
     }
   };
+
+  const animateText = function () {
+    if (document.querySelector('.swiper-slide-active .slider__item--animate')) {
+      return
+    }
+    let items = document.querySelectorAll('.swiper-slide-active, .swiper-slide-next')
+
+    let stepTime = 0
+    items.forEach(item => {
+      Array.from(item.children).forEach(childern=> {
+        setTimeout(()=>{
+
+          childern.classList.add('slider__item--animate')
+
+        }, stepTime)
+      stepTime+=200
+
+      })
+
+    })
+  }
 
   window.addEventListener(`resize`, function () {
     if (storySlider) {
