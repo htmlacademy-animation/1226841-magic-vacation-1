@@ -1865,7 +1865,7 @@ img {
   font-size: 2.4rem;
   line-height: 1.27;
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(1.5rem);
   transition: all 0.2s ease;
 }
 .intro__message--anim {
@@ -1978,6 +1978,12 @@ img {
 .body--anim .page-header__logo {
   transform: translateX(0);
 }
+.body--anim .page-header__menu a.active::after {
+  width: 100%;
+}
+.body--anim .page-header__social {
+  transform: scale(1);
+}
 
 .page-header__wrapper {
   margin: 0 auto;
@@ -2011,7 +2017,7 @@ img {
   padding: 1rem 0;
   width: 10rem;
   color: #ffffff;
-  transform: translateX(-100px);
+  transform: translateX(-5rem);
   transition: transform 0.7s cubic-bezier(0.36, 0.96, 0.69, 0.78);
 }
 .page-header__logo:hover {
@@ -2259,7 +2265,8 @@ img {
   }
 }
 .page-header__menu a.active::after {
-  width: 100%;
+  width: 0;
+  transition: width 0.3s ease;
 }
 .page-header__menu a:hover, .page-header__menu a:focus {
   color: #a67ee5;
@@ -2273,6 +2280,8 @@ img {
 
 .page-header__social {
   margin-left: 4.8rem;
+  transform: scale(0);
+  transition: transform 0.3s ease;
 }
 @media (min-width: 2000px) {
   .page-header__social {
@@ -3256,7 +3265,7 @@ img {
   color: #5f458c;
   background-color: #ffffff;
   z-index: 1;
-  transform: translateY(40px);
+  transform: translateY(5rem);
   transition: transform 0.7s cubic-bezier(0.36, 0.96, 0.69, 0.78);
 }
 @media (max-width: 1024px) and (orientation: portrait) {
