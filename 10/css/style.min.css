@@ -2799,11 +2799,11 @@ img {
   animation-fill-mode: forwards;
 }
 .active .prizes__item .prizes__img-part2.prizes__chair {
-  animation-duration: 0.6s;
+  animation-duration: 0.3s;
   animation-delay: 1.7s;
 }
 .active .prizes__item .prizes__img-part2.prizes__suitcase {
-  animation-duration: 0.6s;
+  animation-duration: 0.3s;
   animation-delay: 0s;
 }
 
