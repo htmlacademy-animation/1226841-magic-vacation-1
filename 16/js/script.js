@@ -62349,7 +62349,7 @@ class Anim3D {
   init(numberScene = 0) {
     this.currentScene = `scene${numberScene}`;
     if (Anim3D.textures[this.currentScene].loadedTexture) {
-      this.renderScene();
+      this.setTexture();
     } else {
       this.initTexture();
     }
@@ -62359,17 +62359,20 @@ class Anim3D {
     let texture = new three__WEBPACK_IMPORTED_MODULE_0__["TextureLoader"](manager).load(Anim3D.textures[this.currentScene].url);
     manager.onLoad = () => {
       Anim3D.textures[this.currentScene].loadedTexture = texture;
-      Anim3D.textures[this.currentScene].scene = new three__WEBPACK_IMPORTED_MODULE_0__["Scene"]();
-      const geometry = new three__WEBPACK_IMPORTED_MODULE_0__["PlaneGeometry"](2048, 1024);
-      const material = new three__WEBPACK_IMPORTED_MODULE_0__["MeshBasicMaterial"]({map: Anim3D.textures[this.currentScene].loadedTexture});
-      const image = new three__WEBPACK_IMPORTED_MODULE_0__["Mesh"](geometry, material);
-      Anim3D.textures[this.currentScene].scene.add(image);
-      this.renderScene();
+      this.setTexture();
     };
+  }
+  setTexture() {
+    this.scene = new three__WEBPACK_IMPORTED_MODULE_0__["Scene"]();
+    const geometry = new three__WEBPACK_IMPORTED_MODULE_0__["PlaneGeometry"](2048, 1024);
+    const material = new three__WEBPACK_IMPORTED_MODULE_0__["MeshBasicMaterial"]({map: Anim3D.textures[this.currentScene].loadedTexture});
+    const image = new three__WEBPACK_IMPORTED_MODULE_0__["Mesh"](geometry, material);
+    this.scene.add(image);
+    this.renderScene();
   }
 
   renderScene() {
-    Anim3D.renderer.render(Anim3D.textures[this.currentScene].scene, Anim3D.camera);
+    Anim3D.renderer.render(this.scene, Anim3D.camera);
   }
 
   static updateSize() {
