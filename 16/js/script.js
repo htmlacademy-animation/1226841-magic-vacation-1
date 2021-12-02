@@ -60913,7 +60913,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-Object(_animWebGL_anim3D__WEBPACK_IMPORTED_MODULE_9__["setSettingsAnim3D"])();
 
 const animChangeScreen = () => {
   const anim3D = new _animWebGL_anim3D__WEBPACK_IMPORTED_MODULE_9__["Anim3D"]();
@@ -62307,13 +62306,12 @@ const animJumpText = (el, {property, direction, timeFunction, classRunAnim}) => 
 /*!*********************************************************!*\
   !*** ./source/js/modules/animation/animWebGL/anim3D.js ***!
   \*********************************************************/
-/*! exports provided: Anim3D, setSettingsAnim3D */
+/*! exports provided: Anim3D */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Anim3D", function() { return Anim3D; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSettingsAnim3D", function() { return setSettingsAnim3D; });
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
 
 
@@ -62340,6 +62338,17 @@ const TEXTURE = Object.freeze({
     loadedTexture: null
   },
 });
+
+const textures = JSON.parse(JSON.stringify(TEXTURE));
+const camera = new three__WEBPACK_IMPORTED_MODULE_0__["PerspectiveCamera"](45, window.innerWidth / window.innerHeight, 0.1, 1024);
+const renderer = new three__WEBPACK_IMPORTED_MODULE_0__["WebGLRenderer"]();
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setSize(window.innerWidth, window.innerHeight);
+camera.position.z = 1024;
+window.addEventListener(`load`, () => {
+  document.querySelector(`.three--screen`).appendChild(renderer.domElement);
+});
+let isEventResize = null;
 class Anim3D {
   constructor() {
     this.scene = new three__WEBPACK_IMPORTED_MODULE_0__["Scene"]();
@@ -62348,54 +62357,47 @@ class Anim3D {
   }
   init(numberScene = 0) {
     this.currentScene = `scene${numberScene}`;
-    if (Anim3D.textures[this.currentScene].loadedTexture) {
+    if (textures[this.currentScene].loadedTexture) {
       this.setTexture();
     } else {
       this.initTexture();
     }
+    this.initEventListner();
   }
   initTexture() {
     const manager = new three__WEBPACK_IMPORTED_MODULE_0__["LoadingManager"]();
-    let texture = new three__WEBPACK_IMPORTED_MODULE_0__["TextureLoader"](manager).load(Anim3D.textures[this.currentScene].url);
+    let texture = new three__WEBPACK_IMPORTED_MODULE_0__["TextureLoader"](manager).load(textures[this.currentScene].url);
     manager.onLoad = () => {
-      Anim3D.textures[this.currentScene].loadedTexture = texture;
+      textures[this.currentScene].loadedTexture = texture;
       this.setTexture();
     };
   }
   setTexture() {
     this.scene = new three__WEBPACK_IMPORTED_MODULE_0__["Scene"]();
     const geometry = new three__WEBPACK_IMPORTED_MODULE_0__["PlaneGeometry"](2048, 1024);
-    const material = new three__WEBPACK_IMPORTED_MODULE_0__["MeshBasicMaterial"]({map: Anim3D.textures[this.currentScene].loadedTexture});
+    const material = new three__WEBPACK_IMPORTED_MODULE_0__["MeshBasicMaterial"]({map: textures[this.currentScene].loadedTexture});
     const image = new three__WEBPACK_IMPORTED_MODULE_0__["Mesh"](geometry, material);
     this.scene.add(image);
     this.renderScene();
   }
 
   renderScene() {
-    Anim3D.renderer.render(this.scene, Anim3D.camera);
+    renderer.render(this.scene, camera);
   }
 
-  static updateSize() {
-    Anim3D.renderer.setSize(window.innerWidth, window.innerHeight);
+  updateSize() {
+    renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderScene();
   }
+  initEventListner() {
+    if (!isEventResize) {
+      window.addEventListener(`resize`, () => {
+        this.updateSize();
+      });
+      isEventResize = true;
+    }
+  }
 }
-const setSettingsAnim3D = () => {
-  Anim3D.textures = JSON.parse(JSON.stringify(TEXTURE));
-  Anim3D.camera = new three__WEBPACK_IMPORTED_MODULE_0__["PerspectiveCamera"](45, window.innerWidth / window.innerHeight, 0.1, 1024);
-  Anim3D.renderer = new three__WEBPACK_IMPORTED_MODULE_0__["WebGLRenderer"]();
-  Anim3D.renderer.setPixelRatio(window.devicePixelRatio);
-  Anim3D.renderer.setSize(window.innerWidth, window.innerHeight);
-  Anim3D.camera.position.z = 1024;
-
-  window.addEventListener(`resize`, () => {
-    Anim3D.updateSize();
-  });
-
-  window.addEventListener(`load`, () => {
-    document.querySelector(`.three--screen`).appendChild(Anim3D.renderer.domElement);
-  });
-};
 
 
 /***/ }),
