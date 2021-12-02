@@ -62320,7 +62320,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const basicUrlImg = `../../img/module-5/scenes-textures/`;
+const basicUrlImg = `./img/module-5/scenes-textures/`;
+
 const TEXTURE = Object.freeze({
   scene0: {
     url: `${basicUrlImg}scene-0.png`,
