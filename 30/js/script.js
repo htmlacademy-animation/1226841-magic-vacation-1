@@ -70389,7 +70389,7 @@ class ObjectsScene0 extends three__WEBPACK_IMPORTED_MODULE_0__["Group"] {
 
   addAirplane() {
     const airplane = this.mapModels[`airplane`].model;
-    this.add(airplane.model);
+    this.add(airplane);
   }
 
   addWatermelon() {
