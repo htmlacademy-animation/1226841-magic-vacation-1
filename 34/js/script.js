@@ -70659,9 +70659,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const keysModels = [`airplane`, `watermelon`, `suitcase`];
-class ObjectsScene0 extends three__WEBPACK_IMPORTED_MODULE_0__["Group"] {
+class ObjectsScene0 {
   constructor() {
-    super();
     this.mapShapes = null;
     this.mapModels = null;
     this.constructChildren();
@@ -70674,7 +70673,7 @@ class ObjectsScene0 extends three__WEBPACK_IMPORTED_MODULE_0__["Group"] {
   }
   async constructChildren() {
     await this.setMapsFigure();
-    this.addBackground();
+    this.figures.push(this.getBackground());
     this.figures.push(this.getFlamingo());
     this.figures.push(this.getQuestion());
     this.figures.push(this.getSnowflake());
@@ -70687,13 +70686,15 @@ class ObjectsScene0 extends three__WEBPACK_IMPORTED_MODULE_0__["Group"] {
     // this.addSuitcase();
   }
 
-  addBackground() {
+  getBackground() {
     const geometry = new three__WEBPACK_IMPORTED_MODULE_0__["PlaneGeometry"](1405, 1405);
     const background = new three__WEBPACK_IMPORTED_MODULE_0__["Mesh"](geometry, Object(_generalSettings_getMaterial__WEBPACK_IMPORTED_MODULE_3__["getMaterial"])(_generalSettings_typeMaterials__WEBPACK_IMPORTED_MODULE_6__["BASIC"], {
       color: _generalSettings_colors__WEBPACK_IMPORTED_MODULE_5__["mapColors"].purple
     }));
     background.position.set(0, 0, 10);
-    this.add(background);
+    return {
+      figure: background
+    };
   }
   getFlamingo() {
     const flamingo = new _extrudeSvg_ExtrudeSvg__WEBPACK_IMPORTED_MODULE_1__["ExtrudedSvg"](this.mapShapes, `flamingo`);
@@ -70714,8 +70715,8 @@ class ObjectsScene0 extends three__WEBPACK_IMPORTED_MODULE_0__["Group"] {
         }),
         new _animCanvas_Animation__WEBPACK_IMPORTED_MODULE_9__["Animation"]({
           f: (t, details) => {
-            const ampY = 0.05;
-            const ampX = 0.08;
+            const ampY = 0.015;
+            const ampX = 0.018;
             const period = 4000;
             flamingo.position.y = flamingo.position.y +
             ampY * Math.sin(2 * Math.PI * (details.currentTime - details.startTime) / period);
@@ -70750,8 +70751,8 @@ class ObjectsScene0 extends three__WEBPACK_IMPORTED_MODULE_0__["Group"] {
         }),
         new _animCanvas_Animation__WEBPACK_IMPORTED_MODULE_9__["Animation"]({
           f: (t, details) => {
-            const ampY = 0.07;
-            const ampX = 0.08;
+            const ampY = 0.021;
+            const ampX = 0.028;
             const period = 5000;
             question.position.y = question.position.y +
             ampY * Math.sin(2 * Math.PI * (details.currentTime - details.startTime) / period);
@@ -70827,7 +70828,7 @@ class ObjectsScene0 extends three__WEBPACK_IMPORTED_MODULE_0__["Group"] {
         }),
         new _animCanvas_Animation__WEBPACK_IMPORTED_MODULE_9__["Animation"]({
           f: (t, details) => {
-            const ampY = 0.2;
+            const ampY = 0.025;
             const ampX = 0.02;
             const period = 5000;
             leaf.position.y = leaf.position.y -
@@ -70858,7 +70859,6 @@ class ObjectsScene0 extends three__WEBPACK_IMPORTED_MODULE_0__["Group"] {
     airplane.position.set(250, 180, 100);
     airplane.rotation.copy(new three__WEBPACK_IMPORTED_MODULE_0__["Euler"](80 * three__WEBPACK_IMPORTED_MODULE_0__["Math"].DEG2RAD, 120 * three__WEBPACK_IMPORTED_MODULE_0__["Math"].DEG2RAD, -30 * three__WEBPACK_IMPORTED_MODULE_0__["Math"].DEG2RAD), `XYZ`);
     airplane.scale.set(1.5, 1.5, 1.5);
-    this.add(airplane);
   }
 
   getWatermelon() {
@@ -70881,8 +70881,8 @@ class ObjectsScene0 extends three__WEBPACK_IMPORTED_MODULE_0__["Group"] {
         }),
         new _animCanvas_Animation__WEBPACK_IMPORTED_MODULE_9__["Animation"]({
           f: (t, details) => {
-            const ampY = 0.15;
-            const ampX = 0.2;
+            const ampY = 0.015;
+            const ampX = 0.04;
             const period = 7000;
             watermelon.position.y = watermelon.position.y +
             ampY * Math.sin(2 * Math.PI * (details.currentTime - details.startTime) / period);
@@ -70904,7 +70904,6 @@ class ObjectsScene0 extends three__WEBPACK_IMPORTED_MODULE_0__["Group"] {
     suitcase.position.set(-80, -180, 40);
     suitcase.rotation.copy(new three__WEBPACK_IMPORTED_MODULE_0__["Euler"](30 * three__WEBPACK_IMPORTED_MODULE_0__["Math"].DEG2RAD, -135 * three__WEBPACK_IMPORTED_MODULE_0__["Math"].DEG2RAD, 15 * three__WEBPACK_IMPORTED_MODULE_0__["Math"].DEG2RAD), `XYZ`);
     suitcase.scale.set(0.6, 0.6, 0.6);
-    this.add(suitcase);
   }
 
   getSuturn() {
@@ -70930,7 +70929,7 @@ class ObjectsScene0 extends three__WEBPACK_IMPORTED_MODULE_0__["Group"] {
         new _animCanvas_Animation__WEBPACK_IMPORTED_MODULE_9__["Animation"]({
           f: (t, details) => {
             const ampY = 0.05;
-            const ampX = 0.2;
+            const ampX = 0.022;
             const period = 6500;
             saturn.position.y = saturn.position.y -
             ampY * Math.sin(2 * Math.PI * (details.currentTime - details.startTime) / period);
